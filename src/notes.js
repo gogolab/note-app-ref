@@ -70,8 +70,6 @@ const removeNote = function(id) {
 };
 
 const sortNotes = function(sortBy) {
-    console.log("sortBy in sortNotes: ", sortBy);
-
     if (sortBy === "byEdited") {
         return notes.sort((a, b) => {
             if (a.updatedAt > b.updatedAt) {

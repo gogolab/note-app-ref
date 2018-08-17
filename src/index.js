@@ -1,11 +1,5 @@
-import {
-    getNotes,
-    createNote,
-    removeNote,
-    updateNote,
-    loadNotes
-} from "./notes";
-import { getFilters, setFilters, logFilters } from "./filters";
+import { createNote, loadNotes } from "./notes";
+import { setFilters } from "./filters";
 import { renderNotes } from "./views";
 
 renderNotes();

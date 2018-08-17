@@ -9,19 +9,6 @@ const generateNoteDOM = function(note) {
     const textEl = document.createElement("p");
     const statusEl = document.createElement("p");
 
-    // const button = document.createElement("button");
-
-    // // Setup the remove note button
-    // button.textContent = "x";
-    // noteEl.appendChild(button);
-    // button.addEventListener("click", function() {
-    //     removeNote(note.id);
-    //     saveNotes(notes);
-    //     renderNotes(notes, filters);
-    // });
-
-    // Setup the note title text
-    // textEl.textContent = note.title.length ? note.title : "Unnamed note";
     noteEl.classList.add("list-item");
 
     textEl.textContent = note.title || "Unnamed note";
