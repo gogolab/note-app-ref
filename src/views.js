@@ -1,0 +1,71 @@
+import moment from "moment";
+
+import getFilters from "./filters";
+import sortNotes from "./notes";
+
+// Generate the DOM structure for a note
+const generateNoteDOM = function(note) {
+    const noteEl = document.createElement("a");
+    const textEl = document.createElement("p");
+    const statusEl = document.createElement("p");
+
+    // const button = document.createElement("button");
+
+    // // Setup the remove note button
+    // button.textContent = "x";
+    // noteEl.appendChild(button);
+    // button.addEventListener("click", function() {
+    //     removeNote(note.id);
+    //     saveNotes(notes);
+    //     renderNotes(notes, filters);
+    // });
+
+    // Setup the note title text
+    // textEl.textContent = note.title.length ? note.title : "Unnamed note";
+    noteEl.classList.add("list-item");
+
+    textEl.textContent = note.title || "Unnamed note";
+    noteEl.setAttribute("href", `edit.html#${note.id}`);
+    textEl.classList.add("list-item__title");
+    noteEl.appendChild(textEl);
+
+    statusEl.textContent = generateLastUpdated(note.updatedAt);
+    statusEl.classList.add("list-item__subtitle");
+    noteEl.appendChild(statusEl);
+
+    return noteEl;
+};
+
+// Render application notes
+const renderNotes = function() {
+    const notesEl = document.querySelector("#notes");
+    const filters = getFilters();
+    const notes = sortNotes(filters.sortBy);
+
+    const filteredNotes = notes.filter(function(note) {
+        return note.title
+            .toLowerCase()
+            .includes(filters.searchText.toLowerCase());
+    });
+
+    notesEl.innerHTML = "";
+
+    if (filteredNotes.length > 0) {
+        filteredNotes.forEach(function(note) {
+            const noteEl = generateNoteDOM(note);
+            notesEl.appendChild(noteEl);
+        });
+    } else {
+        const empytMessage = document.createElement("p");
+        empytMessage.textContent = "No notes to show.";
+        empytMessage.classList.add("empty-message");
+
+        notesEl.appendChild(empytMessage);
+    }
+};
+
+const generateLastUpdated = function(timestamp) {
+    return `last updated: ${moment(timestamp).fromNow()}.`;
+};
+
+export { renderNotes, generateNoteDOM, generateLastUpdated };
