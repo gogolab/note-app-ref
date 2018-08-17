@@ -33,6 +33,28 @@ const createNote = () => {
     return id;
 };
 
+const updateNote = (id, updates) => {
+    const note = notes.find(note => note.id === id);
+
+    if (!note) {
+        return;
+    }
+
+    if (typeof updates.title === "string") {
+        note.title = updates.title;
+        note.updatedAt = moment().valueOf();
+    }
+
+    if (typeof updates.body === "string") {
+        note.body = updates.body;
+        note.updatedAt = moment().valueOf();
+    }
+
+    saveNotes();
+
+    return note;
+};
+
 // Remove a note from the list
 const removeNote = function(id) {
     const noteIndex = notes.findIndex(function(note) {
@@ -81,26 +103,6 @@ const sortNotes = function(sortBy) {
     } else {
         return notes;
     }
-};
-
-const updateNote = (id, updates) => {
-    const note = notes.find(note => note.id === id);
-
-    if (!note) {
-        return;
-    }
-
-    if (typeof updates.title === "string") {
-        note.title = updates.title;
-        note.updatedAt = moment().valueOf();
-    }
-
-    if (typeof updates.body === "string") {
-        note.body = updates.body;
-        note.updatedAt = moment().valueOf();
-    }
-
-    saveNotes();
 };
 
 // Save the notes to localStorage
