@@ -29,6 +29,8 @@ const createNote = () => {
     });
 
     saveNotes();
+
+    return id;
 };
 
 // Remove a note from the list
