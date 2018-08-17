@@ -81,6 +81,26 @@ const sortNotes = function(sortBy) {
     }
 };
 
+const updateNote = (id, updates) => {
+    const note = notes.find(note => note.id === id);
+
+    if (!note) {
+        return;
+    }
+
+    if (typeof updates.title === "string") {
+        note.title = updates.title;
+        note.updatedAt = moment().valueOf();
+    }
+
+    if (typeof updates.body === "string") {
+        note.body = updates.body;
+        note.updatedAt = moment().valueOf();
+    }
+
+    saveNotes();
+};
+
 // Save the notes to localStorage
 const saveNotes = function() {
     localStorage.setItem("notes", JSON.stringify(notes));
@@ -88,4 +108,4 @@ const saveNotes = function() {
 
 notes = loadNotes();
 
-export { getNotes, createNote, removeNote, sortNotes };
+export { getNotes, createNote, removeNote, sortNotes, updateNote };
