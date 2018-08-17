@@ -74,6 +74,7 @@ const initializeEditPage = noteId => {
     const updatedDateEl = document.getElementById("last-updated");
 
     const notes = getNotes();
+
     const note = notes.find(note => note.id === noteId);
 
     if (!note) {

@@ -1,5 +1,5 @@
 import { initializeEditPage, generateLastUpdated } from "./views";
-import { updateNote, removeNote } from "./notes";
+import { updateNote, removeNote, loadNotes } from "./notes";
 
 const noteTitleEl = document.getElementById("note-title");
 const noteBodyEl = document.getElementById("note-body");

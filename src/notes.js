@@ -1,20 +1,22 @@
 import cuid from "cuid";
 import moment from "moment";
 
-let notes = [];
+let notes;
 
 // Read existing notes from localStorage
 const loadNotes = function() {
     const notesJSON = localStorage.getItem("notes");
 
     try {
-        return notesJSON ? JSON.parse(notesJSON) : [];
+        notes = notesJSON ? JSON.parse(notesJSON) : [];
     } catch (e) {
-        return [];
+        notes = [];
     }
 };
 
-const getNotes = () => notes;
+const getNotes = () => {
+    return notes;
+};
 
 const createNote = () => {
     const id = cuid();
@@ -110,6 +112,6 @@ const saveNotes = function() {
     localStorage.setItem("notes", JSON.stringify(notes));
 };
 
-notes = loadNotes();
+loadNotes();
 
-export { getNotes, createNote, removeNote, sortNotes, updateNote };
+export { getNotes, createNote, removeNote, sortNotes, updateNote, loadNotes };
